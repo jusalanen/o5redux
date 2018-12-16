@@ -1,36 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {createStore} from 'redux'
-//import unicafeReducer from './unicafeReducer'
-
-const initialState = {
-  good: 0,
-  ok: 0,
-  bad: 0
-}
-
-const unicafeReducer = (state = initialState, action) => {
-  console.log(action)
-  console.log(state)
-  // eslint-disable-next-line default-case
-  switch (action.type) {
-    case 'GOOD':
-      state.good += 1
-      return state
-    case 'OK':
-      state.ok += 1
-      return state
-    case 'BAD':
-      state.bad += 1
-      return state 
-    case 'ZERO':
-      return initialState
-  }
-  return state
-}
+import unicafeReducer from './unicafeReducer'
 
 const store = createStore(unicafeReducer)
-
 
 const Statistiikka = () => {
   const {good, ok, bad} = store.getState()
@@ -40,21 +13,20 @@ const Statistiikka = () => {
   if (total === 0) {
     return (
       <div>
-        <h2>Statistiikka</h2>
+        <h3>Statistiikka</h3>
         <div>ei yhtään palautetta annettu</div>
       </div>
     )
   } else {      
     return (
       <div>
-        <h2>Statistiikka</h2>
-          <p>hyvä: {good}</p>
-          <p>neutraali: {ok}</p>
-          <p>huono: {bad}</p>
-          <p>hyviä: {prosHyv.toFixed(1)} %</p>
-      
-          <button onClick={e => store.dispatch({ 
-            type: 'ZERO' })}>nollaa tilasto</button>
+        <h3>Statistiikka</h3>
+        <table><tbody>
+        <tr><td width="75">hyvä: </td><td width="40">{good}</td></tr>
+        <tr><td width="75">neutraali: </td><td width="40">{ok}</td></tr>
+        <tr><td width="75">huonu: </td><td width="40">{bad}</td></tr>
+        <tr><td width="75">hyviä: </td><td width="60">{prosHyv.toFixed(1)} %</td></tr>
+        </tbody></table>
       </div >
     )
   }
@@ -74,6 +46,7 @@ class App extends React.Component {
         <button onClick={this.klik('OK')}>neutraali</button>
         <button onClick={this.klik('BAD')}>huono</button>
         <Statistiikka />
+        <button onClick={this.klik('ZERO')}>nollaa tilasto</button>
       </div>
     )
   }

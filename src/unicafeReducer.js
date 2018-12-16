@@ -1,5 +1,3 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
 
 const initialState = {
   good: 0,
@@ -9,17 +7,18 @@ const initialState = {
 
 const unicafeReducer = (state = initialState, action) => {
   console.log(action)
+  console.log(state)
   // eslint-disable-next-line default-case
   switch (action.type) {
     case 'GOOD':
-      return state.good + 1
+      return Object.assign({}, state, { good: state.good + 1 })
     case 'OK':
-      return state.ok + 1
+      return Object.assign({}, state, { ok: state.ok + 1 })
     case 'BAD':
-      return state.bad + 1
+      return Object.assign({}, state, { bad: state.bad + 1 })
     case 'ZERO':
-      return initialState
-  }
+      return Object.assign({}, state, { good: 0, ok: 0, bad: 0 })
+    }
   return state
 }
 
