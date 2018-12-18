@@ -9,6 +9,7 @@ const Statistiikka = () => {
   const {good, ok, bad} = store.getState()
   const total = good + ok + bad
   const prosHyv = good / total * 100
+  const ka = (good - bad) / total
 
   if (total === 0) {
     return (
@@ -24,8 +25,9 @@ const Statistiikka = () => {
         <table><tbody>
         <tr><td width="75">hyvä: </td><td width="40">{good}</td></tr>
         <tr><td width="75">neutraali: </td><td width="40">{ok}</td></tr>
-        <tr><td width="75">huonu: </td><td width="40">{bad}</td></tr>
+        <tr><td width="75">huono: </td><td width="40">{bad}</td></tr>
         <tr><td width="75">hyviä: </td><td width="60">{prosHyv.toFixed(1)} %</td></tr>
+        <tr><td width="75">keskiarvo: </td><td width="60">{ka.toFixed(2)}</td></tr>
         </tbody></table>
       </div >
     )
